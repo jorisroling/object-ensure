@@ -48,56 +48,15 @@ const schemaField = {
     }
 }
 
-/*
-const configSchema = {
-    rootpath: { //The configuration path. It should be the root of the project for now!
-        type: String,
-        required: true,
-    },
-    suites: { // Array of strings containing test directories
-        type: [String],
-        required: true,
-    },
-    hostname: { // The hostname of the machine
-        type: String,
-        required: false,
-        default:'localhost'
-    },
-    grid: {   // Boolean indicating if you want to use the grid or local testing.
-        type: Boolean,
-        required: false,
-        default:false
-    },
-    results: { // The hostname of the machine
-        type: String,
-        required: true,
-        default:'results'
-    },
-    results_path: { // The location for the test json output
-        type: String,
-        required: true,
-        default: function() {
-            return `${this.rootpath}/.tmp/${this.results}`
-        }
-    },
-    json_reporter_output: { // The location for the test json output
-        type: String,
-        required: true,
-        default: function() {
-            return `${this.results_path}/build.json`
-        }
-    },
-};
-*/
 function _validate(obj,schema,internal)
 {
     if (!internal) _validate(schema,schemaSchema,true);
     // eyes({obj,schema})
     if (!obj) {
-        throw new Error(`In ${internal?obj.context:schema.context} ${internal?'schema':schema.name} is not specified`)
+        throw new Error('In '+(internal?obj.context:schema.context)+' '+(internal?'schema':schema.name)+' is not specified')
     }
     if (typeof obj != 'object') {
-        throw new Error(`In ${internal?obj.context:schema.context} ${internal?'schema':schema.name} is not an object`)
+        throw new Error('In '+(internal?obj.context:schema.context)+' '+(internal?'schema':schema.name)+' is not an object')
     }
     for (var name in schema.schema) {
         if (!internal) _validate(schema.schema[name],schemaField,true);
@@ -107,7 +66,7 @@ function _validate(obj,schema,internal)
                     type_check_system(obj[name], schema.schema[name].type);
                 } catch (e) {
                     // eyes({obj,name})
-                    throw new Error(`In ${internal?obj.context:schema.context} ${internal?'schema':schema.name}['${name}'] ${e.message}`)
+                    throw new Error('In '+(internal?obj.context:schema.context)+' '+(internal?'schema':schema.name)+'[\''+name+'\']'+' '+e.message)
                 }
             }
         } else {
@@ -120,7 +79,7 @@ function _validate(obj,schema,internal)
             }
         }
         if (schema.schema[name].required && !obj.hasOwnProperty(name)) {
-            throw new Error(`In ${internal?obj.context:schema.context} ${internal?'schema':schema.name}['${name}'] is not present, but it is required`)
+            throw new Error('In '+(internal?obj.context:schema.context)+' '+(internal?'schema':schema.name)+'[\''+name+'\'] is not present, but it is required')
         }
     }
     return obj;
