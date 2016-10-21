@@ -1,6 +1,6 @@
 {
   "name": "object-ensure",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Object schema validation",
   "main": "index.js",
   "scripts": {
