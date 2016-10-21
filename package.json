@@ -8,6 +8,15 @@
   },
   "author": "Joris Röling",
   "license": "ISC",
+  "homepage": "https://github.com/jorisroling/object-ensure#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jorisroling/object-ensure.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jorisroling/object-ensure/issues"
+  },
+  "main": "index.js",
   "dependencies": {
     "eyes": "^0.1.8",
     "type-check-system": "^1.3.0"
